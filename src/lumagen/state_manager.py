@@ -160,9 +160,7 @@ class StateManager:
         if os.path.exists(self.state_file):
             try:
                 os.remove(self.state_file)
-                self._log_state(
-                    f"State cleared successfully for project {self.project_id}"
-                )
+
             except OSError as e:
                 self._log_state(
                     f"Error clearing state for project {self.project_id}: {str(e)}",
@@ -187,6 +185,10 @@ class StateManager:
 
         # Clear the temp directory
         self.clear_temp_dir()
+
+        self._log_state(
+            f"State and files cleared successfully for project {self.project_id}"
+        )
 
     @classmethod
     def get_instance(cls, project_id: str) -> "StateManager":
